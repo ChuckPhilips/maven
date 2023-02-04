@@ -93,7 +93,7 @@ jobs:
           image_resource:
             type: registry-image
             source:
-              repository: maven
+              repository: alpine
           run:
             path: sh
             args:
