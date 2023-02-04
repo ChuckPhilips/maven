@@ -13,9 +13,6 @@ resources:
       password: ((docker-hub-password))
       repository: ((docker-hub-username))/((docker-hub-repo-name))
 
-caches:
-  - path: $HOME/.m2/repository
-
 jobs:
   - name: test
     public: true
@@ -25,6 +22,10 @@ jobs:
         trigger: true
       - task: mvn-test
         config:
+          caches:
+            - path: $HOME/.m2/repository
+            - path: $HOME/.gradle/caches/
+            - path: $HOME/.gradle/wrapper/
           platform: linux
           image_resource:
             type: docker-image
@@ -50,6 +51,10 @@ jobs:
         passed: [test]
       - task: mvn-package
         config:
+          caches:
+            - path: $HOME/.m2/repository
+            - path: $HOME/.gradle/caches/
+            - path: $HOME/.gradle/wrapper/
           platform: linux
           image_resource:
             type: docker-image
