@@ -13,6 +13,9 @@ resources:
       password: ((docker-hub-password))
       repository: ((docker-hub-username))/((docker-hub-repo-name))
 
+caches:
+  - path: $HOME/.m2/repository
+
 jobs:
   - name: test
     public: true
