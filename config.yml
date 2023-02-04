@@ -1,0 +1,11 @@
+# Docker
+docker-hub-email: zgchuck@gmail.com
+docker-hub-username: zgchuck
+docker-hub-password: $start@Dockerhub21
+docker-hub-repo-name: maven
+
+# Kubernetes
+server: <<API SERVER URI>>
+namespace: <<NAMESPACE>>
+cad: <<CERT AUTH DATA>>
+token: <<K8 TOKEN>>
