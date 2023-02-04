@@ -73,3 +73,25 @@ jobs:
       - put: spring-boot-service-docker-repository
         params:
           build: spring-boot-service-out
+
+  - name: deploy
+    public: true
+    serial: true
+    plan:
+      - get: spring-boot-service
+        trigger: false
+        passed: [package]
+
+      - task: deploy
+        config:
+          platform: linux
+          image_resource:
+            type: registry-image
+            source:
+              repository: maven
+          run:
+            path: sh
+            args:
+              - -cx
+              - |
+                echo "deploying..."
