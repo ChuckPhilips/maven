@@ -84,7 +84,7 @@ jobs:
     serial: true
     plan:
       - get: spring-boot-service
-        trigger: false
+        trigger: true
         passed: [package]
 
       - task: deploy
