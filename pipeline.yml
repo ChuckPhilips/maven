@@ -1,6 +1,7 @@
 resources:
   - name: spring-boot-service
     type: git
+    icon: github
     source:
       uri: https://github.com/ChuckPhilips/maven.git
       branch: main
