@@ -21,6 +21,13 @@ resources:
       password: ((docker-hub-password))
       repository: ((docker-hub-username))/((docker-hub-repo-name))
 
+  - name: terraform-image
+    type: git
+    icon: github
+    source:
+      uri: https://github.com/hashicorp/docker-hub-images.git
+      branch: master
+
 jobs:
   - name: test
     public: true
@@ -30,7 +37,7 @@ jobs:
         trigger: true
       - task: mvn-test
         config:
-          << : *cache-config
+          <<: *cache-config
           platform: linux
           image_resource:
             type: docker-image
@@ -59,7 +66,7 @@ jobs:
         passed: [test]
       - task: mvn-package
         config:
-          << : *cache-config
+          <<: *cache-config
           platform: linux
           image_resource:
             type: docker-image
@@ -88,21 +95,20 @@ jobs:
     public: true
     serial: true
     plan:
+      - get: terraform-image
       - get: spring-boot-service
         trigger: true
         passed: [package]
 
-      - task: deploy
+      - task: check-terrafom-version
         config:
-          << : *cache-config
           platform: linux
           image_resource:
-            type: registry-image
-            source:
-              repository: alpine
+            type: docker-image
+            source: { repository: hashicorp/terraform }
           run:
             path: sh
             args:
-              - -cx
+              - -exc
               - |
-                echo "deploying..."
+                terraform --version
