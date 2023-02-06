@@ -121,6 +121,7 @@ jobs:
             args:
               - -cx
               - |
+                ls -alh
                 ls -lah ./spring-boot-service-out
 
   - name: deploy
