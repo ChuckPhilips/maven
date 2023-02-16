@@ -1,0 +1,197 @@
+cache-config: &cache-config
+  caches:
+    - path: $HOME/.m2/repository
+    - path: $HOME/.gradle/caches/
+    - path: $HOME/.gradle/wrapper/
+
+resources:
+  - name: spring-boot-service
+    type: git
+    icon: github
+    source:
+      uri: https://github.com/ChuckPhilips/maven.git
+      branch: main
+
+  - name: spring-boot-service-docker-repository
+    type: docker-image
+    icon: docker
+    source:
+      email: ((docker-hub-email))
+      username: ((docker-hub-username))
+      password: ((docker-hub-password))
+      repository: ((docker-hub-username))/((docker-hub-repo-name))
+
+  - name: terraform-image
+    type: git
+    icon: github
+    source:
+      uri: https://github.com/hashicorp/docker-hub-images.git
+      branch: master
+
+  - name: version
+    type: semver
+    icon: file
+    source:
+      driver: git
+      uri: git@github.com:ChuckPhilips/maven.git
+      initial_version: 0.0.1
+      branch: version
+      file: insanitywarning
+      private_key: |
+        -----BEGIN OPENSSH PRIVATE KEY-----
+        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
+        -----END OPENSSH PRIVATE KEY-----
+
+jobs:
+  - name: test
+    public: true
+
+    plan:
+      - get: spring-boot-service
+        trigger: true
+      - put: version
+        params: {bump: major}
+
+      - load_var: version-number
+        file: version/version
+        reveal: true
+
+      - task: mvn-test
+        config:
+          <<: *cache-config
+          platform: linux
+          image_resource:
+            type: docker-image
+            source: { repository: alpine }
+          inputs:
+            - name: version
+          run:
+            path: sh
+            args:
+              - -cx
+              - |
+                ls -lah ./version
+
+      - task: display-version
+        config:
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: alpine
+          inputs:
+          - name: version
+          params:
+            VERSION: ((.:version-number))
+          run:
+            path: env
+
+
+
+  - name: package
+    public: true
+    serial: true
+    plan:
+      - get: spring-boot-service
+        trigger: true
+        passed: [test]
+      - task: mvn-package
+        config:
+          <<: *cache-config
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: maven
+              tag: 3.6.0-jdk-8-alpine
+          inputs:
+            - name: spring-boot-service
+          run:
+            path: 'mvn'
+            args:
+              - -f
+              - spring-boot-service/pom.xml
+              - clean
+              - package
+
+          outputs:
+            - name: spring-boot-service-out
+              path: spring-boot-service
+
+      - put: spring-boot-service-docker-repository
+        params:
+          build: spring-boot-service-out
+
+      - task: mvn-test
+        config:
+          <<: *cache-config
+          platform: linux
+          image_resource:
+            type: docker-image
+            source: { repository: alpine }
+          inputs:
+            - name: spring-boot-service-out
+          run:
+            path: sh
+            args:
+              - -cx
+              - |
+                ls -alh
+                ls -lah ./spring-boot-service-out
+
+  - name: deploy
+    public: true
+    serial: true
+    plan:
+      - get: terraform-image
+      - get: spring-boot-service
+        trigger: true
+        passed: [package]
+
+      - task: check-terrafom-version
+        config:
+          platform: linux
+          image_resource:
+            type: docker-image
+            source: { repository: hashicorp/terraform }
+          run:
+            path: sh
+            args:
+              - -exc
+              - |
+                terraform --version
